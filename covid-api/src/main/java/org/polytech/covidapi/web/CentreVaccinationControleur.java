@@ -14,7 +14,7 @@ import org.polytech.covidapi.domain.CentreVaccination;
 import org.polytech.covidapi.service.CentreVaccinationService;
 
 @RestController
-public class CentreVaccinationController {
+public class CentreVaccinationControleur {
     @Autowired
     private CentreVaccinationService centerService;
     //Chercher dans queryparam pourcity
