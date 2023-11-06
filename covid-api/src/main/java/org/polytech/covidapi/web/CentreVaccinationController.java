@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.polytech.covidapi.domain.VaccinationCenter;
-import org.polytech.covidapi.service.VaccinationCenterService;
+import org.polytech.covidapi.domain.CentreVaccination;
+import org.polytech.covidapi.service.CentreVaccinationService;
 
 @RestController
-public class VaccinationCenterController {
+public class CentreVaccinationController {
     @Autowired
-    private VaccinationCenterService centerService;
+    private CentreVaccinationService centerService;
     //Chercher dans queryparam pourcity
    // /api/centers?city=Nancy
    // /api/center/12
@@ -24,21 +24,21 @@ public class VaccinationCenterController {
 
 
     @GetMapping(path = "/api/center")
-    public List<VaccinationCenter> get(
+    public List<CentreVaccination> get(
          @RequestParam("city") String city) {
         return centerService.findAllByCity(city);
     }
 
     
     @GetMapping(path = "/api/center/{id}")
-    public Optional<VaccinationCenter> get(
+    public Optional<CentreVaccination> get(
         @PathVariable("id") Integer id) {
         return centerService.findById(id);
     }
     
 
     @GetMapping(path = "/api/center/")
-    public List<VaccinationCenter> getAllCenter() {
+    public List<CentreVaccination> getAllCenter() {
         return centerService.findAll();
     }
 }

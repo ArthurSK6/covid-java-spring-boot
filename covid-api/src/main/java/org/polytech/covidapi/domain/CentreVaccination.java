@@ -5,7 +5,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class VaccinationCenter {
+public class CentreVaccination {
     @Id
     private Integer id;
 
