@@ -11,4 +11,4 @@ spring:
     database_platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     #UTILISER LA COMMANDE CI DESSOUS POUR CREER LA BASE DE DONNEES ET APRES METTRE EN COMMENTAIRE
-    #hibernate.ddl-auto: create
+    #hibernate.ddl-auto: update
