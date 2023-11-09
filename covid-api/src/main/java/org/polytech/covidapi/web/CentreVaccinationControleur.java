@@ -7,13 +7,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.polytech.covidapi.domain.CentreVaccination;
 import org.polytech.covidapi.service.CentreVaccinationService;
 
+
+
 @RestController
+@RequestMapping(path = "/api")
 public class CentreVaccinationControleur {
     @Autowired
     private CentreVaccinationService centerService;
@@ -23,21 +27,22 @@ public class CentreVaccinationControleur {
    // /api/centers?city=Nancy&open=true
 
 
-    @GetMapping(path = "/api/center")
+
+    @GetMapping(path = "/center")
     public List<CentreVaccination> get(
          @RequestParam("city") String city) {
         return centerService.findAllByCity(city);
     }
 
     
-    @GetMapping(path = "/api/center/{id}")
+    @GetMapping(path = "/center/{id}")
     public Optional<CentreVaccination> get(
         @PathVariable("id") Integer id) {
         return centerService.findById(id);
     }
     
 
-    @GetMapping(path = "/api/center/")
+    @GetMapping(path = "/center/")
     public List<CentreVaccination> getAllCenter() {
         return centerService.findAll();
     }
