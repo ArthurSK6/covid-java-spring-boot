@@ -28,14 +28,18 @@ public class CentreVaccination {
     @JsonIgnoreProperties("centreVaccination")
     private List<Utilisateurs> utilisateurs;
 
+/*
+    // Constructeurs
+    public CentreVaccination() {
+    }
 
-    // Constructeur
     public CentreVaccination(String name, String postalCode, String address, String city) {
     this.name = name;
     this.postalCode = postalCode;
     this.address = address;
     this.city = city;
     }
+ */
 
     // Getters et Setters
 

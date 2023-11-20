@@ -29,7 +29,11 @@ public class Utilisateurs {
     @JsonIgnoreProperties("utilisateurs")
     private CentreVaccination centreVaccination;
 
+/* 
     // Constructeur
+    public Utilisateurs() {
+    }
+
     public Utilisateurs(String nom, String prenom, String email, String password, String role) {
         this.nom = nom;
         this.prenom = prenom;
@@ -37,7 +41,7 @@ public class Utilisateurs {
         this.password = password;
         this.role = role;
     }
-
+ */
     // Getters et Setters
 
     public Long getId() {
