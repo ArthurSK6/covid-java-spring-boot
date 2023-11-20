@@ -39,6 +39,29 @@ public class CentreVaccinationService {
         return centerRepository.findByName(name);
     }
 
+    // Ajouter un utilisateur à un centre de vaccination
+    public Optional<CentreVaccination> addUserToCentreVaccination(Long idCentre, Long idUser) {
+        return centerRepository.addUserToCentreVaccination(idCentre, idUser);
+    }
+
+    // Supprimer un utilisateur d'un centre de vaccination
+    public Optional<CentreVaccination> deleteUserFromCentreVaccination(Long idCentre, Long idUser) {
+        return centerRepository.deleteUserFromCentreVaccination(idCentre, idUser);
+    }
+
+    // Obtenir tous les utilisateurs d'un centre de vaccination
+    public List<CentreVaccination> findAllUsersFromCentreVaccination(Long idCentre) {
+        return centerRepository.findAllUsersFromCentreVaccination(idCentre);
+    }
+
+    // Obtenir tous les utilisateurs en fonction de leur role et d'un centre de vaccination
+    public List<CentreVaccination> findAllUsersByRoleAndCentreVaccination(String role, Long idCentre) {
+        return centerRepository.findAllUsersByRoleAndCentreVaccination(role, idCentre);
+    }
+
+
+    
+
     // Supprimer un centre de vaccination par son id s'il existe
     public void deleteById(Long id) {
         if (centerRepository.findById(id).isPresent()) {

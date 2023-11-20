@@ -61,6 +61,40 @@ public class CentreVaccinationControleur {
         return CentreVaccinationService.findByName(name);
     }
 
+    // Ajouter un utilisateur à un centre de vaccination
+    @GetMapping(path = "/utilisateur/add")
+    public Optional<CentreVaccination> addUserToCentreVaccination(
+        @RequestParam("idCentre") Long idCentre,
+        @RequestParam("idUser") Long idUser) {
+        return CentreVaccinationService.addUserToCentreVaccination(idCentre, idUser);
+    }
+
+    // Supprimer un utilisateur d'un centre de vaccination
+    @GetMapping(path = "/utilisateur/delete")
+    public Optional<CentreVaccination> deleteUserFromCentreVaccination(
+        @RequestParam("idCentre") Long idCentre,
+        @RequestParam("idUser") Long idUser) {
+        return CentreVaccinationService.deleteUserFromCentreVaccination(idCentre, idUser);
+    }
+
+    // Obtenir tous les utilisateurs d'un centre de vaccination
+    @GetMapping(path = "/utilisateur")
+    public List<CentreVaccination> findAllUsersFromCentreVaccination(
+        @RequestParam("idCentre") Long idCentre) {
+        return CentreVaccinationService.findAllUsersFromCentreVaccination(idCentre);
+    }
+
+    // Obtenir tous les utilisateurs en fonction de leur role et d'un centre de vaccination
+    @GetMapping(path = "/utilisateur")
+    public List<CentreVaccination> findAllUsersByRoleAndCentreVaccination(
+        @RequestParam("role") String role,
+        @RequestParam("idCentre") Long idCentre) {
+        return CentreVaccinationService.findAllUsersByRoleAndCentreVaccination(role, idCentre);
+    }
+
+
+
+    
     // Supprimer un centre de vaccination par son id s'il existe
     @GetMapping(path = "/delete")
     public void deleteCenterById(

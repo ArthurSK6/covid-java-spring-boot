@@ -18,6 +18,6 @@ public interface UtilisateursRepository extends JpaRepository<Utilisateurs, Long
     public List<Utilisateurs> findByRole(String role);   // Trouver un utilisateur par son rôle
     public Optional<Utilisateurs> findByEmail(String email);   // Trouver un utilisateur par son email
 
-    public void deleteById(Integer id);   // Supprimer un utilisateur par son id
+    public Optional<Utilisateurs> deleteById(Integer id);   // Supprimer un utilisateur par son id
 } 
 
