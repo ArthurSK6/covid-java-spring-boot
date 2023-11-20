@@ -1,9 +1,12 @@
 package org.polytech.covidapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 // Création d'une table Utilisateurs avec les attributs id, nom, prenom, email, password, role
@@ -14,7 +17,7 @@ public class Utilisateurs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String nom;
     private String prenom;
@@ -22,9 +25,11 @@ public class Utilisateurs {
     private String password;
     private String role;
 
-    public Utilisateurs() {
-    }
+    @ManyToOne
+    @JsonIgnoreProperties("utilisateurs")
+    private CentreVaccination centreVaccination;
 
+    // Constructeur
     public Utilisateurs(String nom, String prenom, String email, String password, String role) {
         this.nom = nom;
         this.prenom = prenom;
@@ -33,14 +38,13 @@ public class Utilisateurs {
         this.role = role;
     }
 
-    
     // Getters et Setters
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -89,6 +93,5 @@ public class Utilisateurs {
         return "Utilisateurs [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", password="
                 + password + ", role=" + role + "]";
     }
-   
    
 }
