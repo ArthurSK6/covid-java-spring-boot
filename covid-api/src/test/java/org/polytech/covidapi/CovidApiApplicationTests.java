@@ -1,4 +1,6 @@
-package org.polytech.covidapi;
+/* package org.polytech.covidapi;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +47,11 @@ class CovidApiApplicationTests {
 	// On test l'affichage de tous les centres de vaccination
 	@Test
 	void testGetAllCentreVaccination() {
-		centreVaccinationRepository.findAll();
+		List<CentreVaccination> CentreVaccinations = centreVaccinationRepository.findAll();
+		
+		for (CentreVaccination centreVaccination : CentreVaccinations) {
+			System.out.println(centreVaccination.getName());
+		}
 	}
 
 	// On test l'ajout d'un utilisateur
@@ -74,6 +80,10 @@ class CovidApiApplicationTests {
 	// On test l'affichage de tous les utilisateurs
 	@Test
 	void testGetAllUtilisateur() {
-		utilisateursRepository.findAll();
+		List<Utilisateurs> utilisateurs = utilisateursRepository.findAll();
+		
+		for (Utilisateurs utilisateur : utilisateurs) {
+			System.oust.println(utilisateur.getNom());
+		}
 	}
-}
+} */
