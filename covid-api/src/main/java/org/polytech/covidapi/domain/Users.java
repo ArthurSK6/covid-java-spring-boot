@@ -2,10 +2,12 @@ package org.polytech.covidapi.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -13,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class Utilisateurs {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,28 +23,20 @@ public class Utilisateurs {
 
     private String nom;
     private String prenom;
+
+    @Column(unique = true)
     private String email;
+
     private String password;
     private String role;
 
     @ManyToOne
-    @JsonIgnoreProperties("utilisateurs")
-    private CentreVaccination centreVaccination;
+    @JsonIgnoreProperties("users")
+    @JoinColumn(name = "vaccination_center_id")
+    private VaccinationCenter vaccinationCenter;
 
-/* 
-    // Constructeur
-    public Utilisateurs() {
-    }
-
-    public Utilisateurs(String nom, String prenom, String email, String password, String role) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
- */
-    // Getters et Setters
+    
+    // GETTERS & SETTERS
 
     public Long getId() {
         return id;
@@ -91,6 +85,17 @@ public class Utilisateurs {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public VaccinationCenter getVaccinationCenter() {
+        return vaccinationCenter;
+    }
+
+    public void setVaccinationCenter(VaccinationCenter vaccinationCenter) {
+        this.vaccinationCenter = vaccinationCenter;
+    }
+    
+
+    // TO STRING
 
     @Override
     public String toString() {
