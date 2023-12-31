@@ -1,0 +1,31 @@
+ajouter centre de vaccination
+lire centre de vaccination
+mettre à jour centre de vaccination
+supprimer centre de vaccination
+Trouver tous par ville
+Trouver tous par Code postal
+Trouver par Nom
+
+Trouver tous les utilisateurs lié
+Trouver tous les utilisateurs lié avec un role
+
+Trouver tous les patients de la journée
+
+
+
+
+ajouter utilisateur
+lire utilisateur
+mettre à jour utilisateur
+supprimer utilisateur
+Trouver par Nom
+Trouver par Prénom
+Trouver tous par Role
+
+
+
+
+ajouter crénaux vaccination
+lire crénaux vaccination
+mettre à jour crénaux vaccination
+supprimer crénaux vaccination

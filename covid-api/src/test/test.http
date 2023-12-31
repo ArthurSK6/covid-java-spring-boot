@@ -2,7 +2,7 @@
 
 //GET http://localhost:8081/api/center?city=Paris 
 
-GET http://localhost:8081/api/center/1
+//GET http://localhost:8081/api/center/1
 
-GET http://localhost:8081/api/center/2
+//GET http://localhost:8081/api/center/2
 

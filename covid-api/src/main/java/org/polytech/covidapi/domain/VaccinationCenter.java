@@ -1,56 +1,108 @@
 package org.polytech.covidapi.domain;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table
 public class VaccinationCenter {
-    @Id
-    private Integer id;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
     private String name;
+    
     private String postalCode;
     private String address;
     private String city;
 
-        public Integer getId() {
-            return id;
-        }
-        
-        public void setId(Integer id) {
-            this.id = id;
-        }
+    // @OneToMany
+    @JsonIgnoreProperties("vaccinationCenter")
+    @OneToMany(mappedBy = "vaccinationCenter")
+    private List<Users> users;
 
-        public String getName() {
-            return name;
-        }
+    @JsonIgnoreProperties("vaccinationCenter")
+    @OneToMany(mappedBy = "vaccinationCenter")
+    private List<Rdv> rdv;
 
-        public void setName(String name){
-            this.name = name;
-        }
 
-        public String getPostalCode() {
-            return postalCode;
-        }
+    // GETTERS & SETTERS
 
-        public void setPostalCode(String postalCode){
-            this.postalCode = postalCode;
-        }
+    public Long getId() {
+        return id;
+    }
 
-        public String getAddress() {
-            return address;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public void setAddress(String address){
-            this.address = address;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public String getCity() {
-            return city;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setCity(String city){
-            this.city = city;
-        }
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public List<Users> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<Users> users) {
+        this.users = users;
+    }
+
+    public List<Rdv> getRdv() {
+        return rdv;
+    }
+
+    public void setRdv(List<Rdv> rdv) {
+        this.rdv = rdv;
+    }    
+    
+    // TO STRING
+
+    @Override
+    public String toString() {
+        return "CentreVaccination [id=" + id + ", name=" + name + ", postalCode=" + postalCode + ", address=" + address + ", city=" + city + "]";
+    }
+
+
+    
+    
 }
