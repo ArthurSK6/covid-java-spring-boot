@@ -8,6 +8,7 @@ import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
+import org.polytech.covidapi.domain.ERole;
 import org.polytech.covidapi.domain.Users;
 import org.polytech.covidapi.domain.VaccinationCenter;
 import org.polytech.covidapi.repository.UsersRepository;
@@ -33,12 +34,12 @@ public class UsersService {
     }
 
     // Trouver tous les utilisateurs par role
-    public List<Users> findAllByRole(String role) {
+    public List<Users> findAllByRole(ERole role) {
         return utilisateursRepository.findAllByRole(role);
     }
 
     // Trouver tous les utilisateurs par role et centre de vaccination
-    public List<Users> findAllUsersByRoleAndVaccinationCenter(String role, Long centerId) {
+    public List<Users> findAllUsersByRoleAndVaccinationCenter(ERole role, Long centerId) {
         Optional<VaccinationCenter> center = centerRepository.findById(centerId);
         if (center.isPresent()) {
             return utilisateursRepository.findAllUsersByRoleAndVaccinationCenter(role, center.get());

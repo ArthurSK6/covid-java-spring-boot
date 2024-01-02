@@ -3,6 +3,7 @@ package org.polytech.covidapi.web;
 import java.util.List;
 import java.util.Optional;
 
+import org.polytech.covidapi.domain.ERole;
 import org.polytech.covidapi.domain.Users;
 import org.polytech.covidapi.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +45,14 @@ public class UsersControleur {
     // Obtenir tous les utilisateurs par rôle
     @GetMapping(path = URL_ADMIN + "/role/{role}")
     public List<Users> getUsersByRole(
-        @PathVariable("role") String role) {
+        @PathVariable("role") ERole role) {
         return utilisateursService.findAllByRole(role);
     }
 
     // Obtenir tous les utilisateurs par rôle et centre de vaccination
     @GetMapping(path = URL_ADMIN + "/role/{role}/{centerId}")
     public List<Users> getAllUsersByRoleAndCenter(
-        @PathVariable("role") String role, 
+        @PathVariable("role") ERole role, 
         @PathVariable("centerId") Long centerId) {
         return utilisateursService.findAllUsersByRoleAndVaccinationCenter(role, centerId);
     }
@@ -73,7 +74,7 @@ public class UsersControleur {
     // Ajouter un utilisateur docteur
     @PostMapping(path = URL_ADMIN + "/add")
     public Users addUtilisateurDocteur(@RequestBody Users utilisateur) {
-        utilisateur.setRole("docteur");
+        utilisateur.setRole(ERole.ROLE_DOCTOR);
         return utilisateursService.save(utilisateur);
     }
 

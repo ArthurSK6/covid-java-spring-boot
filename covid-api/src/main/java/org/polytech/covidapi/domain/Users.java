@@ -28,7 +28,7 @@ public class Users {
     private String email;
 
     private String password;
-    private String role;
+    private ERole role;
 
     @ManyToOne
     @JsonIgnoreProperties("users")
@@ -78,11 +78,11 @@ public class Users {
         this.password = password;
     }
 
-    public String getRole() {
+    public ERole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(ERole role) {
         this.role = role;
     }
 
