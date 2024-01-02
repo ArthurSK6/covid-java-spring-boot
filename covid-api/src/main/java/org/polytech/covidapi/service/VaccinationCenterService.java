@@ -95,7 +95,6 @@ public class VaccinationCenterService {
         }
     }
 
-
     // Supprimer un centre de vaccination par son Nom
     @Transactional
     public Long deleteByName(String name) {

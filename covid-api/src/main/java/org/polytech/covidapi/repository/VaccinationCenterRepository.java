@@ -28,9 +28,6 @@ public interface VaccinationCenterRepository extends JpaRepository<VaccinationCe
     // Lier un utilisateur à un centre de vaccination
     // public void linkUserToVaccinationCenter(Long userId, String centerName);
 
-    // Trouver tous les utilisateurs d'un centre de vaccination
-    // public List<Users> findAllUsersByVaccinationCenter(@Param("centerName") String name);
-
     // Supprimer un centre de vaccination par son Nom
     public Long deleteByName(String name);
 }

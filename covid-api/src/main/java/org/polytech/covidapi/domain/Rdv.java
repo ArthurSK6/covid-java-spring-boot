@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 
 @Entity
@@ -29,6 +31,8 @@ public class Rdv {
     private String email;
 
     private String telephone;
+
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     // Non vacciné par défaut

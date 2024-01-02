@@ -22,9 +22,16 @@ public class RdvService {
     @Autowired
     private VaccinationCenterRepository centerRepository;
     
-    // Trouver tous les rendez-vous d'une journée
-    public List<Rdv> findAllByDate(Date date) {
-        return rdvRepository.findAllByDate(date);
+    // Trouver tous les rendez-vous d'une journée en fonction du centre de vaccination
+    public List<Rdv> findAllByDateAndVaccinationCenter(Date date, Long idCenter) {
+        Optional<VaccinationCenter> vaccinationCenterRequest = centerRepository.findById(idCenter);
+
+        if (vaccinationCenterRequest.isPresent()) {
+            VaccinationCenter vaccinationCenter = vaccinationCenterRequest.get();
+            return rdvRepository.findAllByDateAndVaccinationCenter(date, vaccinationCenter);
+        } else {
+            throw new EntityNotFoundException("Centre de vaccination non trouvé avec l'ID fournis.");
+        }
     }
 
     // Trouver le rendez-vous par Id
