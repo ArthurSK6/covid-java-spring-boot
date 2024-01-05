@@ -56,14 +56,22 @@ public class RdvService {
 
     // Ajouter un rendez-vous
     @Transactional
-    public Rdv save(Rdv rdv) {
-        VaccinationCenter vaccinationCenter = rdv.getVaccinationCenter();
+    public Rdv save(Rdv rdv, Long idCenter) {
+        // Trouver le centre de vaccination
+        Optional<VaccinationCenter> vaccinationCenterRequest = centerRepository.findById(idCenter);
+        if (vaccinationCenterRequest.isPresent()) {
+            VaccinationCenter vaccinationCenter = vaccinationCenterRequest.get();
+            rdv.setVaccinationCenter(vaccinationCenter);
 
-        // Ajouter le rdv au centre de vaccination
-        vaccinationCenter.getRdv().add(rdv);
-        centerRepository.save(vaccinationCenter);
+            // Ajouter le rdv au centre de vaccination
+            vaccinationCenter.getRdv().add(rdv);
+            centerRepository.save(vaccinationCenter);
 
-        return rdvRepository.save(rdv);
+            return rdvRepository.save(rdv);
+        } else {
+            throw new EntityNotFoundException("Centre de vaccination non trouvé avec l'ID fournis.");
+        }
+
     }
 
     // Supprimer un rendez-vous par son id s'il existe
@@ -73,6 +81,5 @@ public class RdvService {
             return true;
         }
         return false;
-    }
-    
+    }   
 }

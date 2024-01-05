@@ -1,10 +1,5 @@
 package org.polytech.covidapi.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import jakarta.persistence.EntityNotFoundException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +8,14 @@ import org.polytech.covidapi.domain.Users;
 import org.polytech.covidapi.domain.VaccinationCenter;
 import org.polytech.covidapi.repository.UsersRepository;
 import org.polytech.covidapi.repository.VaccinationCenterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class UsersService {
+
     @Autowired
     private UsersRepository utilisateursRepository;
 

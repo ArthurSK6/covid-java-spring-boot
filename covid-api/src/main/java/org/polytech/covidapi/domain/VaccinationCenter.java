@@ -34,12 +34,11 @@ public class VaccinationCenter {
     private List<Users> users;
 
     @JsonIgnoreProperties("vaccinationCenter")
-    @OneToMany(mappedBy = "vaccinationCenter")
+    @OneToMany(mappedBy = "vaccinationCenter", orphanRemoval = true)
     private List<Rdv> rdv = new ArrayList<>(); ;
 
 
     // GETTERS & SETTERS
-
     public Long getId() {
         return id;
     }
@@ -97,13 +96,8 @@ public class VaccinationCenter {
     }    
     
     // TO STRING
-
     @Override
     public String toString() {
         return "CentreVaccination [id=" + id + ", name=" + name + ", postalCode=" + postalCode + ", address=" + address + ", city=" + city + "]";
     }
-
-
-    
-    
 }

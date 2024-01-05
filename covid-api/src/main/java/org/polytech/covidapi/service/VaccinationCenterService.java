@@ -3,17 +3,15 @@ package org.polytech.covidapi.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import jakarta.persistence.EntityNotFoundException;
-
 import org.polytech.covidapi.domain.Users;
 import org.polytech.covidapi.domain.VaccinationCenter;
 import org.polytech.covidapi.repository.UsersRepository;
 import org.polytech.covidapi.repository.VaccinationCenterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class VaccinationCenterService {
@@ -22,6 +20,9 @@ public class VaccinationCenterService {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private UsersService usersService;
 
     // Trouver tous les centres de vaccination
     public List<VaccinationCenter> findAll() {
@@ -48,23 +49,11 @@ public class VaccinationCenterService {
         return centerRepository.findByName(name);
     }
 
-/*     // Ajouter un utilisateur à un centre de vaccination
-    public Optional<VaccinationCenter> addUserToVaccinationCenter(Long id, String name) {
-        if (centerRepository.findByName(name).isPresent()) {
-
-            // Récupérer l'id du centre de vaccination
-            id = centerRepository.findByName(name).get().getId();
-
-            return centerRepository.addUserToVaccinationCenter(id, name);
-        }
-        return null;
-    } */
-
     // Lier un utilisateur à un centre de vaccination
     @Transactional
-    public void linkUserToVaccinationCenter(Long userId, String centerName) {
+    public void linkUserToVaccinationCenter(Long userId, Long centerId) {
         Optional<Users> userToAdd = usersRepository.findById(userId);
-        Optional<VaccinationCenter> centerToAdd = centerRepository.findByName(centerName);
+        Optional<VaccinationCenter> centerToAdd = centerRepository.findById(centerId);
 
         if (userToAdd.isPresent() && centerToAdd.isPresent()) {
             // Récupérer l'utilisateur et le centre de vaccination
@@ -84,29 +73,37 @@ public class VaccinationCenterService {
     }
 
     // Trouver tous les utilisateurs par centre de vaccination
-    public List<Users> findAllUsersByVaccinationCenter(String centerName) {
-        Optional<VaccinationCenter> centerToAdd = centerRepository.findByName(centerName);
+    public List<Users> findAllUsersByVaccinationCenterById(Long centerId) {
+        Optional<VaccinationCenter> centerToAdd = centerRepository.findById(centerId);
 
         if (centerToAdd.isPresent()) {
             VaccinationCenter vaccinationCenter = centerToAdd.get();
             return vaccinationCenter.getUsers();
         } else {
-            throw new EntityNotFoundException("Centre de vaccination non trouvé avec le nom : " + centerName);
+            throw new EntityNotFoundException("Centre de vaccination non trouvé avec l'ID : " + centerId);
         }
     }
 
-    // Supprimer un centre de vaccination par son Nom
+    // Supprimer un centre de vaccination par son Id s'il existe
     @Transactional
-    public Long deleteByName(String name) {
-        if (centerRepository.findByName(name).isPresent()) {
-            return centerRepository.deleteByName(name);
+    public boolean deleteById(Long id) {
+        Optional<VaccinationCenter> centerToDelete = centerRepository.findById(id);
+
+        if (centerToDelete.isPresent()) {
+            VaccinationCenter vaccinationCenter = centerToDelete.get();
+
+            // Supprimer le centre de vaccination de tous les utilisateurs
+            for (Users user : vaccinationCenter.getUsers()) {
+                usersService.deleteVaccinationCenterFromUser(user.getId());
+            }
+            centerRepository.deleteById(id);
+            return true;
         }
-        return null;
+        return false;
     }
-    
+
     // Ajouter un centre de vaccination
     public VaccinationCenter save(VaccinationCenter centre) {
         return centerRepository.save(centre);
     }
-
 }

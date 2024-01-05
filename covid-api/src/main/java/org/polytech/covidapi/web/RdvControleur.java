@@ -30,7 +30,7 @@ public class RdvControleur {
     private static final String URL_DOCTOR = "/doctor/rdv";
 
     
-    // Obtenir tous les rendez-vous d'une journée (privé)
+    // Obtenir tous les rendez-vous d'un centre pour une journée (privé)
     @GetMapping(path = URL_DOCTOR + "/date")
     public List<Rdv> getAllRdvByDateAndVaccinationCenter(
         @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
@@ -61,8 +61,10 @@ public class RdvControleur {
 
     // Ajouter un rendez-vous (public)
     @PostMapping(path = URL_PUBLIC + "/add")
-    public Rdv addRdv(@RequestBody Rdv rdv ) {
-        return rdvService.save(rdv);
+    public Rdv addRdv(
+        @RequestParam Long idCenter,
+        @RequestBody Rdv rdv ) {
+        return rdvService.save(rdv,idCenter);
     }   
     
 }

@@ -44,6 +44,7 @@ public class Rdv {
     @JoinColumn(name = "vaccination_center_id")
     private VaccinationCenter vaccinationCenter;
 
+    // GETTERS & SETTERS
     public Long getId() {
         return id;
     }
@@ -109,12 +110,10 @@ public class Rdv {
         this.isVaccinated = isVaccinated;
     }
 
-
+    // TO STRING
     @Override
     public String toString() {
         return "Rdv [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", telephone=" + telephone
                 + ", date=" + date + "]";
-    }
-
-   
+    }   
 }

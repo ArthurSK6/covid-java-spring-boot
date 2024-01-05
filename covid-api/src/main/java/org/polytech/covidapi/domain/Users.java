@@ -11,8 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-// Création d'une table Utilisateurs avec les attributs id, nom, prenom, email, password, role
-
 @Entity
 @Table
 public class Users {
@@ -35,9 +33,7 @@ public class Users {
     @JoinColumn(name = "vaccination_center_id")
     private VaccinationCenter vaccinationCenter;
 
-    
     // GETTERS & SETTERS
-
     public Long getId() {
         return id;
     }
@@ -94,13 +90,10 @@ public class Users {
         this.vaccinationCenter = vaccinationCenter;
     }
     
-
     // TO STRING
-
     @Override
     public String toString() {
         return "Utilisateurs [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", password="
                 + password + ", role=" + role + "]";
     }
-   
 }

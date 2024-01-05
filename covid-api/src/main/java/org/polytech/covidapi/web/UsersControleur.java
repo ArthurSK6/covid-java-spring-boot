@@ -44,7 +44,7 @@ public class UsersControleur {
 
     // Obtenir tous les utilisateurs par rôle
     @GetMapping(path = URL_ADMIN + "/role/{role}")
-    public List<Users> getUsersByRole(
+    public List<Users> getAllUsersByRole(
         @PathVariable("role") ERole role) {
         return utilisateursService.findAllByRole(role);
     }
