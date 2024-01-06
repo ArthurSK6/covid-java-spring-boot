@@ -57,14 +57,14 @@ On précisera que l'administrateur à également accès aux endpoints docteur et
 
 ### Docteur
 
-##### Rendez-vous :
+#### Rendez-vous :
 
 * Récupérer tous les rendez-vous à une date d'un centre: **GET** `doctor/rdv/date?date={date}&idCenter={idCentre}`
 * Récupérer le rendez-vous par id : **GET** `doctor/rdv/id/{id}`
 * Valider le rendez-vous (et donc avoir vacciné) par id : **PUT** `doctor/rdv/validate/{id}`
 * Supprimer le rendez-vous par id : **DELETE** `doctor/rdv/delete/{id}`
 
-##### Utilisateur:
+#### Utilisateur:
 
 * Récupérer l'utilisateur par id : **GET** `doctor/user/id/{id}`
 
@@ -72,7 +72,7 @@ On précisera que l'administrateur à également accès aux endpoints docteur et
 
 ### Administrateur
 
-##### Utilisateur:
+#### Utilisateur:
 
 * Récupérer l'utilisateur par rôle : **GET** `admin/user/role/{role}`
 * Récupérer l'utilisateur par rôle et centre de vaccination : **GET** `admin/user/role/{role}/{centerId}`
@@ -90,7 +90,7 @@ On précisera que l'administrateur à également accès aux endpoints docteur et
     }
   ```
 
-##### Centre:
+#### Centre:
 
 * Lier un utilisateur à un centre : **PUT** `admin/centre/utilisateur/add?idUser={idUser}&idCenter={idCentre}`
 * Récupérer tous les utilisateurs d'un centre par id :**GET** `admin/centre/utilisateur/{idCenter}`
@@ -99,11 +99,11 @@ On précisera que l'administrateur à également accès aux endpoints docteur et
 
 ### Super Administrateur
 
-##### Utilisateur:
+#### Utilisateur:
 
 * Obtenir la liste de tous les utilisateurs : **GET** `superadmin/user/all`
 
-##### Centre:
+#### Centre:
 
 * Supprimer un centre : **DELETE** `superadmin/centre/delete/{id}`
 * Créer un centre : **POST** `superadmin/centre/add`
