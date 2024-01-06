@@ -9,17 +9,16 @@ Arthur HURDEBOURG
 
 # Set up du projet
 
-Afin que le projet fonctionne correctement, il vous faudra avoir une base de données PostgreSQL d'initialisé contenant une base vide nommé covid-db.
-Vous pourrez indiquer dans le fichier `covid-java-spring-boot\covid-api\src\main\resources\application.yaml` le nom d'utilisateur ainsi que le mot de passe nécessaire afin de se connecter à la base.
+Afin que le projet fonctionne correctement, il vous faudra avoir une base de données PostgreSQL d'initialisé contenant une base vide nommé covid-db.  
+Vous pourrez indiquer dans le fichier `covid-java-spring-boot\covid-api\src\main\resources\application.yaml` le nom d'utilisateur ainsi que le mot de passe nécessaire afin de se connecter à la base.  
 
-Le Backend est configuré sur le port 8081 soit : `http://localhost:8081/`
+Le Backend est configuré sur le port 8081 soit : `http://localhost:8081/`  
 
 # API REST
 
-Tous les endpoints suivant commenceront par : `http://localhost:8081/api/`
-De plus, tous les mots entre crochets **{}** représente des variables à insérer.
+Tous les endpoints suivant commenceront par : `http://localhost:8081/api/`  
+De plus, tous les mots entre crochets **{}** représente des variables à insérer.  
 Pour finir:
-
 * Les dates sont au format AAAA/MM/JJ
 * Les mails doivent être formater comme un vrai mail
 * Un mot de passe doit avoir au moins 8 caractères dont une Majuscule, une minuscule, un caractère spécial et un chiffre
@@ -29,9 +28,7 @@ Pour finir:
 #### Création d'un rendez-vous
 
 Permet de créer un nouveau rendez-vous dans un centre précis:
-
 * Endpoint : **POST** `public/rdv/add?idCenter={idCentre}`
-
 ```json
 {  
     "nom":"John",  
@@ -45,7 +42,6 @@ Permet de créer un nouveau rendez-vous dans un centre précis:
 #### Récupération de la liste de tous les centres de vaccinations
 
 Permet d'obtenir la liste de tous les centres de vaccinations:
-
 * Endpoint : **GET** `public/centre/all`
 
 #### Récupération de la liste des centres de vaccinations par:
@@ -111,7 +107,6 @@ On précisera que l'administrateur à également accès aux endpoints docteur et
 
 * Supprimer un centre : **DELETE** `superadmin/centre/delete/{id}`
 * Créer un centre : **POST** `superadmin/centre/add`
-
   ```json
   {
       "name": "CHRU Mercy",
@@ -121,7 +116,6 @@ On précisera que l'administrateur à également accès aux endpoints docteur et
   }
   ```
 * Modifier un centre : **PUT** `superadmin/centre/update`
-
   ```json
   { 
       "id": 1,
