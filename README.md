@@ -29,7 +29,8 @@ Pour finir:
 #### Création d'un rendez-vous
 
 Permet de créer un nouveau rendez-vous dans un centre précis:
-Endpoint : **POST** `public/rdv/add?idCenter={idCentre}`
+
+* Endpoint : **POST** `public/rdv/add?idCenter={idCentre}`
 
 ```json
 {  
@@ -44,7 +45,8 @@ Endpoint : **POST** `public/rdv/add?idCenter={idCentre}`
 #### Récupération de la liste de tous les centres de vaccinations
 
 Permet d'obtenir la liste de tous les centres de vaccinations:
-Endpoint : **GET** `public/centre/all`
+
+* Endpoint : **GET** `public/centre/all`
 
 #### Récupération de la liste des centres de vaccinations par:
 
