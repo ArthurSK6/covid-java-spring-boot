@@ -7,10 +7,11 @@ import org.polytech.covidapi.domain.ERole;
 import org.polytech.covidapi.domain.Users;
 import org.polytech.covidapi.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +24,17 @@ public class UsersControleur {
     @Autowired
     private UsersService utilisateursService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     // Définition variable URL superadmin
     private static final String URL_SUPERADMIN = "/superadmin/user";
 
     // Définition variable URL admin
     private static final String URL_ADMIN = "/admin/user";
+
+    // Définition variable URL docteur
+    private static final String URL_DOCTOR = "/doctor/user";
 
     // Obtenir tous les Users
     @GetMapping(path = URL_SUPERADMIN + "/all")
@@ -36,7 +43,7 @@ public class UsersControleur {
     }
 
     // Obtenir un utilisateur par son id
-    @GetMapping(path = URL_ADMIN + "/id/{id}")
+    @GetMapping(path = URL_DOCTOR + "/id/{id}")
     public Optional<Users> getUserbyID(
         @PathVariable("id") Long id) {
         return utilisateursService.findById(id);
@@ -58,7 +65,8 @@ public class UsersControleur {
     }
 
     // Supprimer un utilisateur par son id s'il existe
-    @DeleteMapping(path = URL_SUPERADMIN + "/delete/{id}")
+    @Transactional
+    @DeleteMapping(path = URL_ADMIN + "/delete/{id}")
     public boolean deleteUtilisateurById(
         @PathVariable("id") Long id) {
         return utilisateursService.deleteById(id);
@@ -71,22 +79,18 @@ public class UsersControleur {
         return utilisateursService.deleteVaccinationCenterFromUser(id);
     }
 
-    // Ajouter un utilisateur docteur
-    @PostMapping(path = URL_ADMIN + "/add")
-    public Users addUtilisateurDocteur(@RequestBody Users utilisateur) {
-        utilisateur.setRole(ERole.ROLE_DOCTOR);
-        return utilisateursService.save(utilisateur);
-    }
-
-    // Ajouter un utilisateur tout type
-    @PostMapping(path = URL_SUPERADMIN + "/add")
-    public Users addUtilisateur(@RequestBody Users utilisateur) {
-        return utilisateursService.save(utilisateur);
-    }
-
     // Modifier un utilisateur
-    @PutMapping(path = URL_SUPERADMIN + "/update")
+    @PutMapping(path = URL_ADMIN + "/update")
     public Users updateUtilisateur(@RequestBody Users utilisateur) {
-        return utilisateursService.save(utilisateur);
+        Users user = Users.builder()
+                        .id(utilisateur.getId())
+                        .prenom(utilisateur.getPrenom())
+                        .nom(utilisateur.getNom())
+                        .email(utilisateur.getEmail())
+                        .password(passwordEncoder.encode(utilisateur.getPassword()))
+                        .role(utilisateur.getRole())
+                        .vaccinationCenter(utilisateur.getVaccinationCenter())
+                        .build();
+        return utilisateursService.save(user);
     }
 }

@@ -6,11 +6,14 @@ import java.util.Optional;
 import org.polytech.covidapi.domain.ERole;
 import org.polytech.covidapi.domain.Users;
 import org.polytech.covidapi.domain.VaccinationCenter;
+import org.polytech.covidapi.payload.request.RegisterRequest;
+import org.polytech.covidapi.repository.RefreshTokenRepository;
 import org.polytech.covidapi.repository.UsersRepository;
 import org.polytech.covidapi.repository.VaccinationCenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
@@ -21,6 +24,44 @@ public class UsersService {
 
     @Autowired
     private VaccinationCenterRepository centerRepository;
+
+    @Autowired
+    private RefreshTokenRepository refreshTokenRepository;
+
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    // Création d'un utilisateur super-admin, adin et docteur par défaut au démarrage de l'application
+    @PostConstruct
+    public void createDefaultSuperAdmin() {
+        if (!this.findById(1L).isPresent()) {
+            RegisterRequest superAdmin = new RegisterRequest();
+            superAdmin.setNom("Super");
+            superAdmin.setPrenom("Admin");
+            superAdmin.setEmail("super@admin.com");
+            superAdmin.setPassword("super@admin.com1");
+            superAdmin.setRole(ERole.SUPERADMIN);
+            authenticationService.register(superAdmin);
+        }
+        if (!this.findById(2L).isPresent()) {
+            RegisterRequest superAdmin = new RegisterRequest();
+            superAdmin.setNom("Admin");
+            superAdmin.setPrenom("Admin");
+            superAdmin.setEmail("admin@admin.com");
+            superAdmin.setPassword("admin@admin.com1");
+            superAdmin.setRole(ERole.ADMIN);
+            authenticationService.register(superAdmin);
+        }
+        if (!this.findById(3L).isPresent()) {
+            RegisterRequest superAdmin = new RegisterRequest();
+            superAdmin.setNom("Docteur");
+            superAdmin.setPrenom("Docteur");
+            superAdmin.setEmail("docteur@docteur.com");
+            superAdmin.setPassword("docteur@docteur.com1");
+            superAdmin.setRole(ERole.DOCTOR);
+            authenticationService.register(superAdmin);
+        }
+    }
 
     // Trouver tous les utilisateurs
     public List<Users> findAll() {
@@ -51,6 +92,7 @@ public class UsersService {
     // Supprimer un utilisateur par son id s'il existe
     public boolean deleteById(Long id) {
         if (utilisateursRepository.findById(id).isPresent()) {
+            refreshTokenRepository.deleteByUserId(id);
             utilisateursRepository.deleteById(id);
             return true;
         }

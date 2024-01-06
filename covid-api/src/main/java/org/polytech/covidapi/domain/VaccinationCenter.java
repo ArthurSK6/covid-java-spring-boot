@@ -28,7 +28,7 @@ public class VaccinationCenter {
     private String address;
     private String city;
 
-    // @OneToMany
+
     @JsonIgnoreProperties("vaccinationCenter")
     @OneToMany(mappedBy = "vaccinationCenter")
     private List<Users> users;

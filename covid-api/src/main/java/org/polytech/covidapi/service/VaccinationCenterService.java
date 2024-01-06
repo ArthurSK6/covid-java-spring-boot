@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
@@ -23,6 +24,19 @@ public class VaccinationCenterService {
 
     @Autowired
     private UsersService usersService;
+
+    // Création d'un centre CHRU Brabois par défaut au démarrage de l'application
+    @PostConstruct
+    public void createDefaultVaccinationCenter() {
+        if (!this.findById(1L).isPresent()) {
+            VaccinationCenter vaccinationCenter = new VaccinationCenter();
+            vaccinationCenter.setName("CHRU Brabois");
+            vaccinationCenter.setAddress("10 rue Brabois");
+            vaccinationCenter.setPostalCode("54000");
+            vaccinationCenter.setCity("Brabois");
+            this.save(vaccinationCenter);
+        }
+    }
 
     // Trouver tous les centres de vaccination
     public List<VaccinationCenter> findAll() {
@@ -51,7 +65,7 @@ public class VaccinationCenterService {
 
     // Lier un utilisateur à un centre de vaccination
     @Transactional
-    public void linkUserToVaccinationCenter(Long userId, Long centerId) {
+    public boolean linkUserToVaccinationCenter(Long userId, Long centerId) {
         Optional<Users> userToAdd = usersRepository.findById(userId);
         Optional<VaccinationCenter> centerToAdd = centerRepository.findById(centerId);
 
@@ -67,6 +81,7 @@ public class VaccinationCenterService {
             // Ajouter l'utilisateur au centre de vaccination
             vaccinationCenter.getUsers().add(user);
             centerRepository.save(vaccinationCenter);
+            return true;
         } else {
             throw new EntityNotFoundException("Utilisateur ou centre de vaccination non trouvé avec les IDs fournis.");
         }

@@ -72,14 +72,14 @@ public class VaccinationCenterControleur {
 
     // Lier un utilisateur (id) à un centre de vaccination (id)
     @PutMapping(path = URL_ADMIN + "/utilisateur/add")
-    public void linkUserToVaccinationCenter(
+    public boolean linkUserToVaccinationCenter(
         @RequestParam("idUser") Long idUser,
         @RequestParam("idCenter") Long idCenter) {
-        centreVaccinationService.linkUserToVaccinationCenter(idUser,idCenter);
+        return centreVaccinationService.linkUserToVaccinationCenter(idUser,idCenter);
     }
 
     // Obtenir tous les utilisateurs d'un centre de vaccination
-    @GetMapping(path = URL_ADMIN + "/utilisateur/{name}")
+    @GetMapping(path = URL_ADMIN + "/utilisateur/{idCenter}")
     public List<Users> getAllUsersByVaccinationCenter(
         @PathVariable("idCenter") Long idCenter) {
         return centreVaccinationService.findAllUsersByVaccinationCenterById(idCenter);

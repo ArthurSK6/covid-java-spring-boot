@@ -21,7 +21,7 @@ public class RdvService {
 
     @Autowired
     private VaccinationCenterRepository centerRepository;
-    
+   
     // Trouver tous les rendez-vous d'une journée en fonction du centre de vaccination
     public List<Rdv> findAllByDateAndVaccinationCenter(Date date, Long idCenter) {
         Optional<VaccinationCenter> vaccinationCenterRequest = centerRepository.findById(idCenter);
