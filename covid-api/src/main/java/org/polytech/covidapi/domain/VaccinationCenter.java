@@ -1,5 +1,6 @@
 package org.polytech.covidapi.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,18 +28,17 @@ public class VaccinationCenter {
     private String address;
     private String city;
 
-    // @OneToMany
+
     @JsonIgnoreProperties("vaccinationCenter")
     @OneToMany(mappedBy = "vaccinationCenter")
     private List<Users> users;
 
     @JsonIgnoreProperties("vaccinationCenter")
-    @OneToMany(mappedBy = "vaccinationCenter")
-    private List<Rdv> rdv;
+    @OneToMany(mappedBy = "vaccinationCenter", orphanRemoval = true)
+    private List<Rdv> rdv = new ArrayList<>(); ;
 
 
     // GETTERS & SETTERS
-
     public Long getId() {
         return id;
     }
@@ -96,13 +96,8 @@ public class VaccinationCenter {
     }    
     
     // TO STRING
-
     @Override
     public String toString() {
         return "CentreVaccination [id=" + id + ", name=" + name + ", postalCode=" + postalCode + ", address=" + address + ", city=" + city + "]";
     }
-
-
-    
-    
 }
