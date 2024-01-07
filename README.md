@@ -37,6 +37,7 @@ De plus, un centre est également créé:
       "address": "10 rue Brabois",
       "city": "Brabois"
   }
+  ```
 
 ## PUBLIC
 
