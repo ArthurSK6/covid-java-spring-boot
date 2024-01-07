@@ -23,10 +23,10 @@ Pour finir:
 * Les mails doivent être formater comme un vrai mail
 * Un mot de passe doit avoir au moins 8 caractères dont une Majuscule, une minuscule, un caractère spécial et un chiffre
 
-Par defaut, 3 utilisateurs (Super administrateur, Administrateur et Docteur) sont créé sans centre attribué. Leurs identifiants sont:
-* Email : `super@admin.com` Mdp : `super@admin.com1`
-* Email : `admin@admin.com` Mdp : `admin@admin.com1
-* Email : `docteur@docteur.com` Mdp : `docteur@docteur.com1`
+Par defaut, 3 utilisateurs (Super administrateur, Administrateur et Docteur) sont créés sans centre attribué. Leurs identifiants sont:
+* Email : `super@admin.com`  Mdp : `super@admin.com1`
+* Email : `admin@admin.com`  Mdp : `admin@admin.com1
+* Email : `docteur@docteur.com`  Mdp : `docteur@docteur.com1`
 
 De plus, un centre est également créé:
   ```json
