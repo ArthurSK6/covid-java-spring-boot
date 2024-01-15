@@ -23,7 +23,7 @@ Pour finir:
 * Les mails doivent être formater comme un vrai mail
 * Un mot de passe doit avoir au moins 8 caractères dont une Majuscule, une minuscule, un caractère spécial et un chiffre
 
-Par defaut, 3 utilisateurs (Super administrateur, Administrateur et Docteur) sont créés sans centre attribué. Leurs identifiants sont:
+Par defaut, 3 utilisateurs (Super administrateur, Administrateur et Docteur) sont créés **sans centre attribué**. Leurs identifiants sont:
 * Email : `super@admin.com`  Mdp : `super@admin.com1`
 * Email : `admin@admin.com`  Mdp : `admin@admin.com1
 * Email : `docteur@docteur.com`  Mdp : `docteur@docteur.com1`
@@ -38,6 +38,8 @@ De plus, un centre est également créé:
       "city": "Brabois"
   }
   ```
+
+**Il faut donc se connecter sur l'utilisateur super-administrateur en premier pour attribuer un centre à l'administrateur ou au docteur afin qu'ils disposent d'une interface relative à leur centre. Sans centre attribué, les administrateurs et les docteurs n'ont aucune permission supplémentaire à un utilisateur non connecté.**
 
 ## PUBLIC
 
